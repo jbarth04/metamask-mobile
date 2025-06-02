@@ -41,7 +41,7 @@ const MigratedStorage = {
   },
   async setItem(key: string, value: string) {
     try {
-      return await FilesystemStorage.setItem(key, value, Device.isIos());
+      return await FilesystemStorage.setItem(key, value, Device.isIos() ? undefined : undefined);
     } catch (error) {
       Logger.error(error as Error, {
         message: `Failed to set item for ${key}`,

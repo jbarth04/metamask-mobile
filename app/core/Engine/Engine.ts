@@ -31,7 +31,8 @@ import {
   NetworkStatus,
 } from '@metamask/network-controller';
 import { PhishingController } from '@metamask/phishing-controller';
-import { PreferencesController } from '@metamask/preferences-controller';
+import { PreferencesController as PreferencesControllerType } from '@metamask/preferences-controller';
+const { PreferencesController } = require('@metamask/preferences-controller');
 import '../types/preferences-controller-augmentation';
 import {
   TransactionController,

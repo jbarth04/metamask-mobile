@@ -64,7 +64,7 @@ import reducer, {
   getFeatureFlagChainId,
 } from './index';
 
-const emptyAction: SwapsAction = { type: null };
+const emptyAction = { type: 'INIT' } as unknown as import('./index').SwapsAction;
 
 const DEFAULT_FEATURE_FLAGS = {
   ethereum: {
@@ -469,7 +469,7 @@ describe('swaps reducer', () => {
         },
       } as unknown as typeof rootState.swaps;
 
-      const enabled = swapsSmartTxFlagEnabled(rootState);
+      const enabled = swapsSmartTxFlagEnabled(rootState as any);
       expect(enabled).toEqual(true);
     });
 
@@ -522,7 +522,7 @@ describe('swaps reducer', () => {
         },
       } as unknown as typeof rootState.swaps;
 
-      const enabled = swapsSmartTxFlagEnabled(rootState);
+      const enabled = swapsSmartTxFlagEnabled(rootState as any);
       expect(enabled).toEqual(false);
     });
 
@@ -551,7 +551,7 @@ describe('swaps reducer', () => {
         swaps: initialState,
       };
 
-      const enabled = swapsSmartTxFlagEnabled(rootState);
+      const enabled = swapsSmartTxFlagEnabled(rootState as any);
       expect(enabled).toEqual(false);
     });
   });
@@ -736,7 +736,7 @@ describe('swaps reducer', () => {
           },
         },
       };
-      expect(swapsTokensObjectSelector(state)).toStrictEqual({
+      expect(swapsTokensObjectSelector(state as any)).toStrictEqual({
         '0x0000000000000000000000000000000000000000': undefined,
         '0x0000000000000000000000000000000000000001': undefined,
         '0x0000000000000000000000000000000000000010': undefined,
@@ -755,7 +755,7 @@ describe('swaps reducer', () => {
           },
         },
       };
-      expect(swapsTokensObjectSelector(state)).toStrictEqual({});
+      expect(swapsTokensObjectSelector(state as any)).toStrictEqual({});
     });
   });
 
