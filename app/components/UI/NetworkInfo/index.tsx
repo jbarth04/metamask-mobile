@@ -111,7 +111,7 @@ const createStyles = (colors: {
 
 interface NetworkInfoProps {
   onClose: () => void;
-  isTokenDetectionEnabled: boolean;
+  isTokenDetectionEnabled: boolean | undefined;
 }
 
 const NetworkInfo = (props: NetworkInfoProps) => {

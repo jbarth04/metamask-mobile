@@ -195,7 +195,7 @@ function updateSecurityResultForTransaction(
   updateControllerState: boolean = false,
   securityAlertId?: string,
 ) {
-  store.dispatch(setTransactionSecurityAlertResponse(transactionId, response));
+  store.dispatch(setTransactionSecurityAlertResponse(transactionId || '', response));
 
   if (updateControllerState) {
     updateSecurityAlertResponse(

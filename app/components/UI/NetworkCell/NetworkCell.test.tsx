@@ -1,6 +1,6 @@
 import React from 'react';
 import { fireEvent } from '@testing-library/react-native';
-import { EtherscanSupportedHexChainId } from '@metamask/preferences-controller';
+import { EtherscanSupportedHexChainId } from '../../../types/etherscan-types';
 import images from 'images/image-icons';
 import renderWithProvider from '../../../util/test/renderWithProvider';
 import NetworkCell from './NetworkCell';

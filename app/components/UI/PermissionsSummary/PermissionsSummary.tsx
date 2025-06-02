@@ -563,7 +563,7 @@ const PermissionsSummary = ({
           selectedAddresses={accountAddresses}
           ensByAccountAddress={ensByAccountAddress}
           accounts={accounts}
-          privacyMode={privacyMode}
+          privacyMode={privacyMode || false}
           networkAvatars={networkAvatars}
           handleEditAccountsButtonPress={handleEditAccountsButtonPress}
           {...restAccountsConnectedTabProps}
