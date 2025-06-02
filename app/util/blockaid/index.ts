@@ -15,7 +15,7 @@ export type TransactionType = TransactionMeta &
 
 export const isBlockaidPreferenceEnabled = (): boolean => {
   const { PreferencesController } = Engine.context;
-  return PreferencesController.state.securityAlertsEnabled;
+  return PreferencesController.state.securityAlertsEnabled ?? false;
 };
 
 export const isBlockaidFeatureEnabled = async (): Promise<boolean> =>

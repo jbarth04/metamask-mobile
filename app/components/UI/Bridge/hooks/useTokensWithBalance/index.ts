@@ -246,7 +246,7 @@ export const useTokensWithBalance: ({
           balanceFiat: evmBalanceFiat ?? nonEvmBalanceFiat,
         };
       });
-    return sortAssets(properTokens, tokenSortConfig);
+    return sortAssets(properTokens, tokenSortConfig || { key: 'tokenFiatAmount', order: 'dsc', sortCallback: 'stringNumeric' });
   }, [
     evmAccountTokensAcrossChains,
     multiChainMarketData,

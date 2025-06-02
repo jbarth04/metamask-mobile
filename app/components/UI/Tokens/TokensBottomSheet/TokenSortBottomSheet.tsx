@@ -68,7 +68,7 @@ const TokenSortBottomSheet = () => {
         <ListItemSelect
           testID={WalletViewSelectorsIDs.SORT_DECLINING_BALANCE}
           onPress={() => onSortControlsBottomSheetPress(SortOption.FiatAmount)}
-          isSelected={tokenSortConfig.key === 'tokenFiatAmount'}
+          isSelected={tokenSortConfig?.key === 'tokenFiatAmount'}
           isDisabled={false}
           gap={8}
           verticalAlignment={VerticalAlignment.Center}
@@ -87,7 +87,7 @@ const TokenSortBottomSheet = () => {
           onPress={() =>
             onSortControlsBottomSheetPress(SortOption.Alphabetical)
           }
-          isSelected={tokenSortConfig.key !== 'tokenFiatAmount'}
+          isSelected={tokenSortConfig?.key !== 'tokenFiatAmount'}
           isDisabled={false}
           gap={8}
           verticalAlignment={VerticalAlignment.Center}

@@ -22,7 +22,7 @@ export const SignatureControllerInit: ControllerInitFunction<
     const signatureController = new SignatureController({
       decodingApiUrl: AppConstants.DECODING_API_URL,
       isDecodeSignatureRequestEnabled: () =>
-        preferencesController.state.useTransactionSimulations,
+        preferencesController.state.useTransactionSimulations || false,
       messenger: controllerMessenger,
       // @ts-expect-error - TODO: Not marked as Partial in signature-controller, SignatureControllerOptions needs to be updated
       state: persistedState.SignatureController,

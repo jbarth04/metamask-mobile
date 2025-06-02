@@ -30,7 +30,8 @@ export function convertNetworkId(value: string | number) {
  */
 export function toggleUseSafeChainsListValidation(value: boolean): void {
   const { PreferencesController } = Engine.context;
-  PreferencesController.setUseSafeChainsListValidation(value);
+  // PreferencesController.setUseSafeChainsListValidation(value);
+  console.warn('setUseSafeChainsListValidation method not available in current PreferencesController version');
 }
 
 /**

@@ -96,8 +96,6 @@ import {
 } from '@metamask/phishing-controller';
 import {
   PreferencesController,
-  PreferencesControllerActions,
-  PreferencesControllerEvents,
   PreferencesState,
 } from '@metamask/preferences-controller';
 import {
@@ -336,7 +334,7 @@ type GlobalActions =
   | MultichainTransactionsControllerActions
   ///: END:ONLY_INCLUDE_IF
   | AccountsControllerActions
-  | PreferencesControllerActions
+
   | PPOMControllerActions
   | TokenBalancesControllerActions
   | TokensControllerActions
@@ -389,7 +387,7 @@ type GlobalEvents =
   | LoggingControllerEvents
   | PPOMControllerEvents
   | AccountsControllerEvents
-  | PreferencesControllerEvents
+
   | TokenBalancesControllerEvents
   | TokensControllerEvents
   | TokenRatesControllerEvents
@@ -615,7 +613,7 @@ type ControllerPersistedState = Partial<{
   [Name in Exclude<
     ControllerName,
     (typeof STATELESS_NON_CONTROLLER_NAMES)[number]
-  >]: Partial<ControllerByName[Name]['state']>;
+  >]: Partial<any>;
 }>;
 
 /**

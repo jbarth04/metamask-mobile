@@ -74,9 +74,9 @@ const DeFiPositionsList: React.FC<DeFiPositionsListProps> = () => {
       .flat();
 
     const defiSortConfig = {
-      ...tokenSortConfig,
+      ...(tokenSortConfig || { key: 'tokenFiatAmount', order: 'dsc', sortCallback: 'stringNumeric' }),
       key:
-        tokenSortConfig.key === 'tokenFiatAmount'
+        (tokenSortConfig?.key === 'tokenFiatAmount')
           ? 'protocolAggregate.aggregatedMarketValue'
           : 'protocolAggregate.protocolDetails.name',
     };
@@ -134,7 +134,7 @@ const DeFiPositionsList: React.FC<DeFiPositionsListProps> = () => {
             <DeFiPositionsListItem
               chainId={chainId}
               protocolAggregate={protocolAggregate}
-              privacyMode={privacyMode}
+              privacyMode={privacyMode || false}
             />
           )}
           keyExtractor={(protocolChainAggregate) =>

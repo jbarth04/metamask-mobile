@@ -80,7 +80,7 @@ export const TokenList = ({
         assetKey={item}
         showRemoveMenu={showRemoveMenu}
         setShowScamWarningModal={setShowScamWarningModal}
-        privacyMode={privacyMode}
+        privacyMode={privacyMode || false}
         showPercentageChange={showPercentageChange}
       />
     ),

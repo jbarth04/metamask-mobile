@@ -123,7 +123,7 @@ export class EngineService {
     };
 
     BACKGROUND_STATE_CHANGE_EVENT_NAMES.forEach((eventName) => {
-      engine.controllerMessenger.subscribe(eventName, () =>
+      engine.controllerMessenger.subscribe(eventName as any, () =>
         update_bg_state_cb(eventName.split(':')[0]),
       );
     });

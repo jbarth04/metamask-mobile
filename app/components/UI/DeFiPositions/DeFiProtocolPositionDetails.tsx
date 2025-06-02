@@ -81,7 +81,7 @@ const DeFiProtocolPositionDetails: React.FC = () => {
       <DeFiProtocolPositionGroups
         protocolAggregate={protocolAggregate}
         networkIconAvatar={networkIconAvatar}
-        privacyMode={privacyMode}
+        privacyMode={privacyMode || false}
       />
     </View>
   );

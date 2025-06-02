@@ -106,8 +106,9 @@ export default function migrate(state: unknown) {
         isObject(account.metadata) &&
         !account.metadata.importTime
       ) {
-        if (Object.keys(preferencesControllerState.identities).length) {
-          Object.keys(preferencesControllerState.identities).forEach(
+        const identities = preferencesControllerState.identities as Record<string, any>;
+        if (identities && Object.keys(identities).length) {
+          Object.keys(identities).forEach(
             (identityAddress) => {
               if (
                 toChecksumHexAddress(identityAddress) ===
@@ -116,8 +117,7 @@ export default function migrate(state: unknown) {
                 (
                   accountsControllerState as AccountsControllerState
                 ).internalAccounts.accounts[accountId].metadata.importTime =
-                  preferencesControllerState.identities[identityAddress]
-                    .importTime ?? Date.now();
+                  identities[identityAddress]?.importTime ?? Date.now();
               }
             },
           );

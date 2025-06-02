@@ -17,7 +17,7 @@ import {
   selectShowIncomingTransactionNetworks,
 } from '../../../../selectors/preferencesController';
 import { selectEvmNetworkConfigurationsByChainId } from '../../../../selectors/networkController';
-import { EtherscanSupportedHexChainId } from '@metamask/preferences-controller';
+import { EtherscanSupportedHexChainId } from '../../../../types/etherscan-types';
 import { NetworkConfiguration } from '@metamask/network-controller';
 import styleSheet from './index.styles';
 import {

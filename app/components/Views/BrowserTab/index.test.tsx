@@ -73,8 +73,8 @@ describe('BrowserTab', () => {
   });
 
   it('should render correctly', () => {
-    const { toJSON } = renderWithProvider(<BrowserTab {...mockProps} />, {
-      state: mockInitialState,
+    const { toJSON } = renderWithProvider(<BrowserTab {...(mockProps as any)} />, {
+      state: mockInitialState as any,
     });
     expect(toJSON()).toMatchSnapshot();
   });

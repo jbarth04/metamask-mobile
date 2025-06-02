@@ -54,7 +54,7 @@ const _selectSortedTokenKeys = createSelector(
       tokenFiatAmount: isEvmSelected ? tokenFiatBalances[i] : token.balanceFiat,
     }));
 
-    const tokensSorted = sortAssets(tokensWithBalances, tokenSortConfig);
+    const tokensSorted = sortAssets(tokensWithBalances, tokenSortConfig || {});
 
     endTrace({ name: TraceName.Tokens });
 

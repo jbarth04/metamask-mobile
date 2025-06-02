@@ -49,9 +49,10 @@ export const currencyRateControllerInit: ControllerInitFunction<
 
   // Normalize each currency rate to ensure conversionRate is never null
   Object.entries(currencyRates).forEach(([key, value]) => {
+    const typedValue = value as CurrencyRateEntry;
     normalizedCurrencyRates[key] = {
-      ...value,
-      conversionRate: value.conversionRate ?? 0,
+      ...typedValue,
+      conversionRate: typedValue.conversionRate ?? 0,
     };
   });
 
