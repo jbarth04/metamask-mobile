@@ -106,7 +106,7 @@ export interface CollectiblesState {
   isNftFetchingProgress: boolean;
 }
 
-const initialState: CollectiblesState = {
+export const initialState: CollectiblesState = {
   favorites: {},
   isNftFetchingProgress: false,
 };
