@@ -23,7 +23,7 @@ import { RootState } from '../index';
 export const getFeatureFlagChainId = (chainId: string): string =>
   typeof __DEV__ !== 'undefined' &&
   __DEV__ &&
-  allowedTestnetChainIds.includes(chainId)
+  allowedTestnetChainIds.includes(chainId as any)
     ? NETWORKS_CHAIN_ID.MAINNET
     : chainId;
 
@@ -62,7 +62,8 @@ function addMetadata(chainId: string, tokens: any[], tokenList: any): any[] {
     return tokens;
   }
   return tokens.map((token) => {
-    const tokenMetadata = tokenList[safeToChecksumAddress(token.address)];
+    const checksummedAddress = safeToChecksumAddress(token.address);
+    const tokenMetadata = checksummedAddress ? tokenList[checksummedAddress] : null;
     if (tokenMetadata) {
       return { ...token, name: tokenMetadata.name };
     }
@@ -190,7 +191,7 @@ const swapsControllerAndUserTokens = createSelector(
   (swapsTokens, tokens) => {
     const values = [...(swapsTokens || []), ...(tokens || [])]
       .filter(Boolean)
-      .reduce((map, { hasBalanceError, image, ...token }) => {
+      .reduce((map, token) => {
         const key = token.address.toLowerCase();
 
         if (!map.has(key)) {
@@ -217,14 +218,14 @@ const swapsControllerAndUserTokensMultichain = createSelector(
     const allTokensArr = Object.values(allTokens);
     const allUserTokensCrossChains = allTokensArr.reduce(
       (acc, tokensElement) => {
-        const found = tokensElement[currentUserAddress] || [];
+        const found = currentUserAddress ? tokensElement[currentUserAddress] || [] : [];
         return [...acc, ...found.flat()];
       },
-      [],
+      [] as any[],
     );
-    const values = [...(swapsTokens || []), ...(allUserTokensCrossChains || [])]
+    const values = [...(swapsTokens || []), ...Object.values(allUserTokensCrossChains || {})]
       .filter(Boolean)
-      .reduce((map, { hasBalanceError, image, ...token }) => {
+      .reduce((map, token) => {
         const key = token.address.toLowerCase();
 
         if (!map.has(key)) {
@@ -276,7 +277,7 @@ export const swapsTokensObjectSelector = createSelector(
       return {};
     }
 
-    const result = {};
+    const result: Record<string, undefined> = {};
     for (const token of tokens) {
       result[token.address] = undefined;
     }
@@ -295,7 +296,7 @@ export const swapsTokensMultiChainObjectSelector = createSelector(
       return {};
     }
 
-    const result = {};
+    const result: Record<string, undefined> = {};
     for (const token of tokens) {
       result[token.address] = undefined;
     }
@@ -318,8 +319,8 @@ export const swapsTokensWithBalanceSelector = createSelector(
     }
     const baseTokens = tokens;
     const tokensAddressesWithBalance = Object.entries(balances)
-      .filter(([, balance]) => balance !== 0)
-      .sort(([, balanceA], [, balanceB]) => (lte(balanceB, balanceA) ? -1 : 1))
+      .filter(([, balance]) => Number(balance) !== 0)
+      .sort(([, balanceA], [, balanceB]) => (lte(balanceB as any, balanceA as any) ? -1 : 1))
       .map(([address]) => address.toLowerCase());
     const tokensWithBalance = [];
     const originalTokens = [];
@@ -434,16 +435,16 @@ function swapsReducer(state: SwapsState = initialState, action: SwapsAction): Sw
           typeof featureFlags[chainName] === 'object'
         ) {
           const chainFeatureFlags = featureFlags[chainName];
-          const chainLiveness = getSwapsLiveness(featureFlags, chainIdForName);
+          const chainLiveness = getSwapsLiveness(featureFlags, chainIdForName as any);
 
-          newState[chainIdForName] = {
+          (newState as any)[chainIdForName] = {
             ...state[chainIdForName],
             featureFlags: chainFeatureFlags,
             isLive: chainLiveness,
           };
 
           if (chainIdForName === chainId && rawChainId !== chainId) {
-            newState[rawChainId] = newState[chainIdForName];
+            (newState as any)[rawChainId] = (newState as any)[chainIdForName];
           }
         }
       });
