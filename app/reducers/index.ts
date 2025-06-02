@@ -12,11 +12,11 @@ import userReducer, { UserState } from './user';
 import wizardReducer, { WizardState } from './wizard';
 import onboardingReducer, { OnboardingState } from './onboarding';
 import fiatOrders from './fiatOrders';
-import swapsReducer from './swaps';
+import swapsReducer, { SwapsState } from './swaps';
 import signatureRequestReducer from './signatureRequest';
 import notificationReducer, { NotificationState } from './notification';
-import infuraAvailabilityReducer from './infuraAvailability';
-import collectiblesReducer from './collectibles';
+import infuraAvailabilityReducer, { InfuraAvailabilityState } from './infuraAvailability';
+import collectiblesReducer, { CollectiblesState } from './collectibles';
 import navigationReducer, { NavigationState } from './navigation';
 import networkOnboardReducer from './networkSelector';
 import securityReducer, { SecurityState } from './security';
@@ -56,9 +56,7 @@ export interface RootState {
   // TODO: Replace "any" with type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   legalNotices: any;
-  // TODO: Replace "any" with type
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  collectibles: any;
+  collectibles: CollectiblesState;
   engine: { backgroundState: EngineState };
   // TODO: Replace "any" with type
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -76,13 +74,9 @@ export interface RootState {
   wizard: WizardState;
   onboarding: OnboardingState;
   notification: NotificationState;
-  // TODO: Replace "any" with type
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  swaps: any;
+  swaps: SwapsState;
   fiatOrders: StateFromReducer<typeof fiatOrders>;
-  // TODO: Replace "any" with type
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  infuraAvailability: any;
+  infuraAvailability: InfuraAvailabilityState;
   navigation: NavigationState;
   // The networkOnboarded reducer is TypeScript but not yet a valid reducer
   // TODO: Replace "any" with type
