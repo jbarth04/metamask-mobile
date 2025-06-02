@@ -32,6 +32,7 @@ import {
 } from '@metamask/network-controller';
 import { PhishingController } from '@metamask/phishing-controller';
 import { PreferencesController } from '@metamask/preferences-controller';
+import '../types/preferences-controller-augmentation';
 import {
   TransactionController,
   TransactionMeta,

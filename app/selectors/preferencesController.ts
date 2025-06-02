@@ -23,7 +23,11 @@ export const selectUseNftDetection = createSelector(
 export const selectShowMultiRpcModal = createSelector(
   selectPreferencesControllerState,
   (preferencesControllerState: PreferencesState) =>
-    preferencesControllerState.showMultiRpcModal,
+    (
+      preferencesControllerState as PreferencesState & {
+        showMultiRpcModal: boolean;
+      }
+    ).showMultiRpcModal,
 );
 
 export const selectUseTokenDetection = createSelector(
@@ -35,7 +39,11 @@ export const selectUseTokenDetection = createSelector(
 export const selectDisplayNftMedia = createSelector(
   selectPreferencesControllerState,
   (preferencesControllerState: PreferencesState) =>
-    preferencesControllerState.displayNftMedia,
+    (
+      preferencesControllerState as PreferencesState & {
+        displayNftMedia: boolean;
+      }
+    ).displayNftMedia,
 );
 
 export const selectUseSafeChainsListValidation = createSelector(
@@ -53,7 +61,11 @@ export const selectTokenSortConfig = createSelector(
 export const selectTokenNetworkFilter = createSelector(
   selectPreferencesControllerState,
   (preferencesControllerState: PreferencesState) =>
-    preferencesControllerState.tokenNetworkFilter,
+    (
+      preferencesControllerState as PreferencesState & {
+        tokenNetworkFilter: { [chainId: string]: boolean };
+      }
+    ).tokenNetworkFilter,
 );
 
 export const selectIsTokenNetworkFilterEqualCurrentNetwork =
@@ -62,7 +74,11 @@ export const selectIsTokenNetworkFilterEqualCurrentNetwork =
     (state: RootState) => selectEvmChainId(state),
     (preferencesControllerState: PreferencesState, chainId: Hex) => {
       const tokenNetworkFilter =
-        preferencesControllerState.tokenNetworkFilter || {};
+        (
+          preferencesControllerState as PreferencesState & {
+            tokenNetworkFilter: { [chainId: string]: boolean };
+          }
+        ).tokenNetworkFilter || {};
       if (
         Object.keys(tokenNetworkFilter).length === 1 &&
         Object.keys(tokenNetworkFilter)[0] === chainId

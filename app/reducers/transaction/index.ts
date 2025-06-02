@@ -22,7 +22,7 @@ export interface TransactionState {
   ensRecipient?: string;
   assetType?: string;
   selectedAsset: SelectedAsset;
-  transaction: TransactionObject;
+  transaction: any;
   warningGasPriceHigh?: boolean;
   transactionTo?: string;
   transactionToName?: string;
@@ -38,6 +38,8 @@ export interface TransactionState {
   securityAlertResponses: Record<string, any>;
   useMax: boolean;
   maxValueMode?: boolean;
+  origin?: string;
+  chainId?: string;
 }
 
 export interface TransactionAction {
@@ -63,16 +65,7 @@ const initialState: TransactionState = {
   ensRecipient: undefined,
   assetType: undefined,
   selectedAsset: {},
-  transaction: {
-    data: undefined,
-    from: undefined,
-    gas: undefined,
-    gasPrice: undefined,
-    to: undefined,
-    value: undefined,
-    maxFeePerGas: undefined,
-    maxPriorityFeePerGas: undefined,
-  },
+  transaction: {},
   warningGasPriceHigh: undefined,
   transactionTo: undefined,
   transactionToName: undefined,

@@ -17,6 +17,7 @@ export interface NotificationItem {
 
 export interface NotificationState {
   notifications: NotificationItem[];
+  notification?: any;
 }
 
 export interface NotificationAction {

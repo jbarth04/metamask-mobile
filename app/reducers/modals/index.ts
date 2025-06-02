@@ -5,6 +5,7 @@ export interface ModalsState {
   dappTransactionModalVisible: boolean;
   signMessageModalVisible: boolean;
   infoNetworkModalVisible?: boolean;
+  receiveAsset?: any;
 }
 
 export interface ModalsAction {

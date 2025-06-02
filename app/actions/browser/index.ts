@@ -1,9 +1,9 @@
 export const BrowserActionTypes = {
   ADD_TO_VIEWED_DAPP: 'ADD_TO_VIEWED_DAPP',
-};
+} as const;
 
 export interface AddToViewedDappAction {
-  type: 'ADD_TO_VIEWED_DAPP';
+  type: typeof BrowserActionTypes.ADD_TO_VIEWED_DAPP;
   hostname: string;
 }
 
@@ -17,7 +17,7 @@ export interface ClearHistoryAction {
   type: 'CLEAR_BROWSER_HISTORY';
   id: number;
   metricsEnabled?: boolean;
-  marketingEnabled?: boolean;
+  marketingEnabled?: boolean | null;
 }
 
 export interface AddToWhitelistAction {
@@ -73,12 +73,12 @@ export function addToHistory({ url, name }: { url: string; name: string }): AddT
   };
 }
 
-export function clearHistory(metricsEnabled?: boolean, marketingEnabled?: boolean): ClearHistoryAction {
+export function clearHistory(metricsEnabled?: boolean, marketingEnabled?: boolean | null): ClearHistoryAction {
   return {
     type: 'CLEAR_BROWSER_HISTORY',
     id: Date.now(),
     metricsEnabled,
-    marketingEnabled,
+    marketingEnabled: marketingEnabled ?? undefined,
   };
 }
 
