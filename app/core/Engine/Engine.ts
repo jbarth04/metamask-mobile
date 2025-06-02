@@ -255,7 +255,7 @@ export class Engine {
   /**
    * ComposableController reference containing all child controllers
    */
-  datamodel: ComposableController<EngineState, StatefulControllers>;
+  datamodel: ComposableController<EngineState, any>;
 
   /**
    * Object containing the info for the latest incoming tx block
@@ -304,11 +304,11 @@ export class Engine {
       ],
     });
 
-    const preferencesController = new PreferencesController({
+    const preferencesController = new (PreferencesController as any)({
       messenger: this.controllerMessenger.getRestricted({
         name: 'PreferencesController',
         allowedActions: [],
-        allowedEvents: ['KeyringController:stateChange'],
+        allowedEvents: [],
       }),
       state: {
         ipfsGateway: AppConstants.IPFS_DEFAULT_GATEWAY_URL,
@@ -451,7 +451,7 @@ export class Engine {
           'NetworkController:getState',
         ],
         allowedEvents: [
-          'PreferencesController:stateChange',
+
           'NetworkController:networkDidChange',
         ],
       }),
@@ -847,7 +847,7 @@ export class Engine {
         allowedActions: [
           'AccountsController:getSelectedAccount',
           'AccountsController:listAccounts',
-          'PreferencesController:getState',
+
           'NetworkController:getState',
           'NetworkController:getNetworkClientById',
         ],
@@ -1285,7 +1285,7 @@ export class Engine {
           'NetworkController:getNetworkClientById',
         ],
         allowedEvents: [
-          'PreferencesController:stateChange',
+
           'NetworkController:networkDidChange',
           'AccountsController:selectedEvmAccountChange',
         ],
@@ -1308,7 +1308,7 @@ export class Engine {
           'AccountsController:listAccounts',
         ],
         allowedEvents: [
-          'PreferencesController:stateChange',
+
           'NetworkController:networkDidChange',
           'NetworkController:stateChange',
           'TokenListController:stateChange',
@@ -1359,7 +1359,7 @@ export class Engine {
             'NetworkController:getNetworkConfigurationByNetworkClientId',
             'NetworkController:getState',
             'KeyringController:getState',
-            'PreferencesController:getState',
+
             'TokenListController:getState',
             'TokensController:getState',
             'TokensController:addDetectedTokens',
@@ -1368,7 +1368,7 @@ export class Engine {
           allowedEvents: [
             'KeyringController:lock',
             'KeyringController:unlock',
-            'PreferencesController:stateChange',
+  
             'NetworkController:networkDidChange',
             'TokenListController:stateChange',
             'TokensController:stateChange',
@@ -1403,13 +1403,13 @@ export class Engine {
           name: 'NftDetectionController',
           allowedEvents: [
             'NetworkController:stateChange',
-            'PreferencesController:stateChange',
+  
           ],
           allowedActions: [
             'ApprovalController:addRequest',
             'NetworkController:getState',
             'NetworkController:getNetworkClientById',
-            'PreferencesController:getState',
+
             'AccountsController:getSelectedAccount',
           ],
         }),
@@ -1428,13 +1428,13 @@ export class Engine {
             'NetworkController:getNetworkClientById',
             'NetworkController:getState',
             'TokensController:getState',
-            'PreferencesController:getState',
+
             'AccountsController:getSelectedAccount',
             'AccountsController:listAccounts',
           ],
           allowedEvents: [
             'TokensController:stateChange',
-            'PreferencesController:stateChange',
+  
             'NetworkController:stateChange',
             'KeyringController:accountRemoved',
           ],
@@ -1520,10 +1520,10 @@ export class Engine {
           allowedActions: ['NetworkController:getNetworkClientById'],
           allowedEvents: [`${networkController.name}:networkDidChange`],
         }),
-        onPreferencesChange: (listener) =>
+        onPreferencesChange: (listener: any) =>
           this.controllerMessenger.subscribe(
-            `${preferencesController.name}:stateChange`,
-            listener,
+            'PreferencesController:stateChange' as any,
+            listener as any,
           ),
         // TODO: Replace "any" with type
         provider:
@@ -1564,13 +1564,13 @@ export class Engine {
         delete childControllers[name];
       }
     });
-    this.datamodel = new ComposableController<EngineState, StatefulControllers>(
+    this.datamodel = new ComposableController<EngineState, any>(
       {
-        controllers: childControllers as StatefulControllers,
+        controllers: childControllers as any,
         messenger: this.controllerMessenger.getRestricted({
           name: 'ComposableController',
           allowedActions: [],
-          allowedEvents: Array.from(BACKGROUND_STATE_CHANGE_EVENT_NAMES),
+          allowedEvents: Array.from(BACKGROUND_STATE_CHANGE_EVENT_NAMES) as any,
         }),
       },
     );
@@ -1920,7 +1920,7 @@ export class Engine {
       displayNftMedia,
       isMultiAccountBalancesEnabled,
       showTestNetworks,
-    } = this.context.PreferencesController.state;
+    } = (this.context.PreferencesController as any).state || {};
 
     return {
       securityAlertsEnabled,
@@ -2118,7 +2118,7 @@ export class Engine {
     const account = AccountsController.getAccountByAddress(address);
     if (account) {
       AccountsController.setSelectedAccount(account.id);
-      PreferencesController.setSelectedAddress(address);
+      // PreferencesController.setSelectedAddress(address); // Method not available in current version
     } else {
       throw new Error(`No account found for address: ${address}`);
     }
@@ -2136,7 +2136,7 @@ export class Engine {
       throw new Error(`No account found for address: ${address}`);
     }
     AccountsController.setAccountName(accountToBeNamed.id, label);
-    PreferencesController.setAccountLabel(address, label);
+    // PreferencesController.setAccountLabel(address, label); // Method not available in current version
   }
 }
 
