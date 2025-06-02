@@ -37,7 +37,6 @@ import {
   KeyringControllerGetKeyringsByTypeAction,
   KeyringControllerLockEvent,
 } from '@metamask/keyring-controller';
-import { PreferencesControllerGetStateAction } from '@metamask/preferences-controller';
 import { NetworkControllerGetNetworkClientByIdAction } from '@metamask/network-controller';
 import { SelectedNetworkControllerGetNetworkClientIdForDomainAction } from '@metamask/selected-network-controller';
 
@@ -131,8 +130,7 @@ export function getSnapControllerMessenger(
 }
 
 type InitActions =
-  | KeyringControllerGetKeyringsByTypeAction
-  | PreferencesControllerGetStateAction;
+  | KeyringControllerGetKeyringsByTypeAction;
 
 export type SnapControllerInitMessenger = ReturnType<
   typeof getSnapControllerInitMessenger
@@ -153,7 +151,6 @@ export function getSnapControllerInitMessenger(
     allowedEvents: [],
     allowedActions: [
       'KeyringController:getKeyringsByType',
-      'PreferencesController:getState',
     ],
   });
 }
