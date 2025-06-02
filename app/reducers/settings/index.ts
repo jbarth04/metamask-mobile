@@ -25,6 +25,7 @@ export interface SettingsAction {
   showFiatOnTestnets?: boolean;
   basicFunctionalityEnabled?: boolean;
   deviceNotificationEnabled?: boolean;
+  tokenSortConfig?: any;
 }
 
 const initialState: SettingsState = {
